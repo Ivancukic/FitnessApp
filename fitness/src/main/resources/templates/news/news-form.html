@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+	<title>Save News</title>
+</head>
+
+<body>
+
+	<div class="container">
+	
+		<h3>News Directory</h3>
+		<hr>
+		
+		<p class="h4 mb-4">Save News</p>
+	
+		<form action="#" th:action="@{/news/save}"
+						 enctype="multipart/form-data"
+						 th:object="${news}" method="POST">
+		
+			<!-- Add hidden form field to handle update -->
+			<input type="hidden" th:field="*{id}" />
+			
+			<p>Add Image To Slider</p>
+			
+			<input type="file" name="file" />
+			
+			<br><br>
+
+			<input type="text" th:field="*{smallDescription}"
+					class="form-control mb-4 col-4" placeholder="Enter Small Description">
+					
+			<input type="text" th:field="*{longDescription}"
+					class="form-control mb-4 col-4" placeholder="Enter Long Description">
+					
+					
+				
+			<button type="submit" class="btn btn-info col-2">Save</button>
+						
+		</form>
+	
+		<hr>
+		<a th:href="@{/news/list}">Back to News List</a>
+		
+	</div>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+

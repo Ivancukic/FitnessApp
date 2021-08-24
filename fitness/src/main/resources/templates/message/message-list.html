@@ -1,0 +1,71 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	
+	<title>Message Directory</title>
+</head>
+
+<body>
+
+<div class="container">
+
+	<h3>Message Directory</h3>
+	<hr>
+	
+	<table class="table table-bordered table-striped">
+		<thead class="thead-dark">
+			<tr>
+				<th>First And Last Name</th>
+				<th>Email</th>
+				<th>Phone Number</th>
+				<th>Subject</th>
+				<th>Message</th>
+				<th>Seen Message</th>
+				<th>Delete</th>
+			</tr>
+		</thead>
+		
+		<tbody>
+			<tr th:each="tempMessage : ${messageList}">
+			
+				<td th:text="${tempMessage.name}" />	
+				<td th:text="${tempMessage.email}" />	
+				<td th:text="${tempMessage.phoneNumber}" />
+				<td th:text="${tempMessage.subject}" />
+				<td th:text="${tempMessage.messageIndex}" />
+				<td th:text="${tempMessage.seenMessage}" />
+		 	
+				<td>
+				<div class="row">
+				
+					<div class="col-small">
+										
+					<form action="#" th:action="@{/message/delete}" method="POST">
+					
+						<input type="hidden" name="messageId" th:value="${tempMessage.id}" />						
+						<button type="submit" class="btn btn-danger btn-sm"
+								onclick="if (!(confirm('Are you sure you want to delete this Message?'))) return false">
+								Delete
+						</button>
+
+					</form>
+					</div>
+				</div>	
+				</td>
+				
+				
+			</tr>
+		</tbody>		
+	</table>
+	
+</div>
+	
+</body>
+</html>

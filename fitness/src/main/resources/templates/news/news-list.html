@@ -1,0 +1,82 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	
+	<title>News Page Directory</title>
+</head>
+
+<body>
+
+<div class="container">
+
+	<h3>News Page Directory</h3>
+	<hr>
+	
+	<!-- Add a button -->
+	<a th:href="@{/news/showFormForAdd}"
+		class="btn btn-primary btn-sm mb-3">
+		Add New News
+	</a>
+	
+	
+	<table class="table table-bordered table-striped">
+		<thead class="thead-dark">
+			<tr>
+				<th>Picture</th>
+				<th>Small Description</th>
+				<th>Long Description</th>
+				<th>Update/Delete</th>
+			</tr>
+		</thead>
+		
+		<tbody>
+			<tr th:each="tempNews : ${newsList}">
+			
+				<td th:text="${tempNews.picture}" />
+				<td th:text="${tempNews.smallDescription}" />	
+				<td th:text="${tempNews.longDescription}" />	
+		 	
+				<td>
+				<div class="row">
+				
+					<div class="col-small">
+					
+					<form action="#" th:action="@{/news/showFormForUpdate}" method="POST">
+					
+						<input type="hidden" name="newsId" th:value="${tempNews.id}" />						
+						<button type="submit" class="btn btn-info btn-sm ml-3 mr-1">Update</button>
+
+					</form>
+					</div>
+					
+					<div class="col-small">
+										
+					<form action="#" th:action="@{/news/delete}" method="POST">
+					
+						<input type="hidden" name="newsId" th:value="${tempNews.id}" />						
+						<button type="submit" class="btn btn-danger btn-sm"
+								onclick="if (!(confirm('Are you sure you want to delete this News?'))) return false">
+								Delete
+						</button>
+
+					</form>
+					</div>
+				</div>	
+				</td>
+				
+				
+			</tr>
+		</tbody>		
+	</table>
+	
+</div>
+	
+</body>
+</html>

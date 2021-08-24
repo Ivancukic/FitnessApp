@@ -1,0 +1,84 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	
+	<title>Trainer Directory</title>
+</head>
+
+<body>
+
+<div class="container">
+
+	<h3>Trainer Directory</h3>
+	<hr>
+	
+	<!-- Add a button -->
+	<a th:href="@{/trainer/showFormForAdd}"
+		class="btn btn-primary btn-sm mb-3">
+		Add Trainer
+	</a>
+	
+	
+	<table class="table table-bordered table-striped">
+		<thead class="thead-dark">
+			<tr>
+				<th>First And Last Name</th>
+				<th>Trainings</th>
+				<th>Picture</th>
+				<th>Picture On Index Page</th>
+				<th>Update/Delete</th>
+			</tr>
+		</thead>
+		
+		<tbody>
+			<tr th:each="tempTrainer : ${trainers}">
+			
+				<td th:text="${tempTrainer.name}" />	
+				<td th:text="${tempTrainer.trainings}" />	
+				<td th:text="${tempTrainer.picture}" />	
+				<td th:text="${tempTrainer.atIndexPage}" />	
+		 	
+				<td>
+				<div class="row">
+				
+					<div class="col-small">
+					
+					<form action="#" th:action="@{/trainer/showFormForUpdate}" method="POST">
+					
+						<input type="hidden" name="trainerId" th:value="${tempTrainer.id}" />						
+						<button type="submit" class="btn btn-info btn-sm ml-3 mr-1">Update</button>
+
+					</form>
+					</div>
+					
+					<div class="col-small">
+										
+					<form action="#" th:action="@{/trainer/delete}" method="POST">
+					
+						<input type="hidden" name="trainerId" th:value="${tempTrainer.id}" />						
+						<button type="submit" class="btn btn-danger btn-sm"
+								onclick="if (!(confirm('Are you sure you want to delete this trainer?'))) return false">
+								Delete
+						</button>
+
+					</form>
+					</div>
+				</div>	
+				</td>
+				
+				
+			</tr>
+		</tbody>		
+	</table>
+	
+</div>
+	
+</body>
+</html>
